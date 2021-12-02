@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Auth0New.plist
+   CohesionIB
+
+   Created by Vijendra on 07/05/20.
+   Copyright (c) 2020 Ravi Vora. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+    <key>Domain</key>
+    <string>cohesioncore.auth0.com</string>
+    <key>ClientId</key>
+    <string>fJcjIj1dPfUt41mwrrG0i9Agg5gQwxsn</string>
+    </dict>
+</plist>

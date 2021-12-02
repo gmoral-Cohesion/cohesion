@@ -1,0 +1,245 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute the app, save build artifacts, and more:
+
+variables:
+  image: 'macOS-10.15'
+  configDev: 'Debug'
+  configProd: 'Release'
+  sdk: 'iphoneos'
+  scheme1: 'CohesionIB'
+  scheme2: 'TWHub'
+  schemeProd1: 'CohesionIBProduction'
+  schemeProd2: 'CohesionIB77WProduction'
+  workspacePath: 'CohesionIB/CohesionIB.xcworkspace'
+
+trigger:
+  branches:
+   include:
+        - development
+        - master
+
+stages:
+
+- stage: Development
+
+  dependsOn: []
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
+
+  jobs:
+    - job: CohesionIB
+
+      pool:
+       vmImage: '$(image)'
+
+      steps:
+
+        - task: InstallAppleCertificate@2
+          inputs:
+            certSecureFile: 'DevP12.p12'
+            certPwd: '$(p12Pass2)'
+            keychain: 'temp'
+            deleteCert: true 
+
+        - task: InstallAppleProvisioningProfile@1
+          inputs:
+            provisioningProfileLocation: 'secureFiles'
+            provProfileSecureFile: 'provisionalDev.mobileprovision'
+            removeProfile: true
+
+        - task: CocoaPods@0
+          displayName: 'Installing Dependences'
+          inputs:
+            forceRepoUpdate: false
+            workingDirectory: '$(workspacePath)'
+        
+        - task: Xcode@5
+          displayName: 'Clean Build Project'
+          inputs:
+            actions: 'clean build'
+            configuration: '$(configDev)'
+            sdk: '$(sdk)'
+            xcWorkspacePath: '$(workspacePath)'
+            scheme: '$(scheme1)'
+            xcodeVersion: '12'
+            packageApp: true
+            signingOption: 'auto'
+
+        - task: CopyFiles@2
+          displayName: 'Prepare IPA'
+          inputs:
+            contents: '**/*.ipa'
+            targetFolder: '$(build.artifactStagingDirectory)'
+            overWrite: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish IPA'
+          inputs:
+            pathToPublish: '$(build.artifactStagingDirectory)'
+            artifactName: 'development'
+            artifactType: 'container'
+    
+    - job: Transwestern
+
+      pool:
+       vmImage: '$(image)'
+
+      steps:
+
+        - task: InstallAppleCertificate@2
+          inputs:
+            certSecureFile: 'DevP12.p12'
+            certPwd: '$(p12Pass2)'
+            keychain: 'temp'
+            deleteCert: true 
+
+        - task: InstallAppleProvisioningProfile@1
+          inputs:
+            provisioningProfileLocation: 'secureFiles'
+            provProfileSecureFile: 'Provisional77WDev.mobileprovision'
+            removeProfile: true
+
+        - task: CocoaPods@0
+          displayName: 'Installing Dependences'
+          inputs:
+            forceRepoUpdate: false
+            workingDirectory: '$(workspacePath)'
+        
+        - task: Xcode@5
+          displayName: 'Clean Build Project'
+          inputs:
+            actions: 'clean build'
+            configuration: '$(configDev)'
+            sdk: '$(sdk)'
+            xcWorkspacePath: '$(workspacePath)'
+            scheme: '$(scheme2)'
+            xcodeVersion: '12'
+            packageApp: true
+            signingOption: 'auto'
+
+        - task: CopyFiles@2
+          displayName: 'Prepare IPA'
+          inputs:
+            contents: '**/*.ipa'
+            targetFolder: '$(build.artifactStagingDirectory)'
+            overWrite: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish IPA'
+          inputs:
+            pathToPublish: '$(build.artifactStagingDirectory)'
+            artifactName: 'development'
+            artifactType: 'container'
+            
+- stage: Production
+  
+  dependsOn: []
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  jobs:
+    - job: CohesionIBProd
+
+      pool:
+       vmImage: '$(image)'
+
+      steps:
+        - task: InstallAppleCertificate@2
+          inputs:
+            certSecureFile: 'DistCert.p12'
+            certPwd: '$(p12Pass)'
+            keychain: 'temp'
+            deleteCert: true 
+
+        - task: InstallAppleProvisioningProfile@1
+          inputs:
+            provisioningProfileLocation: 'secureFiles'
+            provProfileSecureFile: 'CohesionCoreNew.mobileprovision'
+            removeProfile: true
+
+        - task: CocoaPods@0
+          displayName: 'Installing Dependences'
+          inputs:
+            forceRepoUpdate: false
+            workingDirectory: '$(workspacePath)'
+        
+        - task: Xcode@5
+          displayName: 'Clean Build Project'
+          inputs:
+            actions: 'clean build'
+            configuration: '$(configProd)'
+            sdk: '$(sdk)'
+            xcWorkspacePath: '$(workspacePath)'
+            scheme: '$(schemeProd1)'
+            xcodeVersion: '12'
+            packageApp: true
+            signingOption: 'manual'
+            signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+            provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
+        - task: CopyFiles@2
+          displayName: 'Prepare IPA'
+          inputs:
+            contents: '**/*.ipa'
+            targetFolder: '$(build.artifactStagingDirectory)'
+            overWrite: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish IPA'
+          inputs:
+            pathToPublish: '$(build.artifactStagingDirectory)'
+            artifactName: 'production'
+            artifactType: 'container'    
+  
+    - job: TranswesternHub
+
+      pool:
+       vmImage: '$(image)'
+
+      steps:
+
+        - task: InstallAppleCertificate@2
+          inputs:
+            certSecureFile: 'DistCert.p12'
+            certPwd: '$(p12Pass)'
+            keychain: 'temp'
+            deleteCert: true 
+
+        - task: InstallAppleProvisioningProfile@1
+          inputs:
+            provisioningProfileLocation: 'secureFiles'
+            provProfileSecureFile: 'TW_Hub_Distribution.mobileprovision'
+            removeProfile: true
+
+        - task: CocoaPods@0
+          displayName: 'Installing Dependences'
+          inputs:
+            forceRepoUpdate: false
+            workingDirectory: '$(workspacePath)'
+        
+        - task: Xcode@5
+          displayName: 'Clean Build Project'
+          inputs:
+            actions: 'clean build'
+            configuration: '$(configProd)'
+            sdk: '$(sdk)'
+            xcWorkspacePath: '$(workspacePath)'
+            scheme: '$(schemeProd2)'
+            xcodeVersion: '12'
+            packageApp: true
+            signingOption: 'manual'
+            signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+            provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
+        - task: CopyFiles@2
+          displayName: 'Prepare IPA'
+          inputs:
+            contents: '**/*.ipa'
+            targetFolder: '$(build.artifactStagingDirectory)'
+            overWrite: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish IPA'
+          inputs:
+            pathToPublish: '$(build.artifactStagingDirectory)'
+            artifactName: 'production'
+            artifactType: 'container'  

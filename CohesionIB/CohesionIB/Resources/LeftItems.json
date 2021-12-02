@@ -1,0 +1,125 @@
+{
+    "data": [ {
+        "menuID": 20,
+        "menuName": "Home",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    },{
+        "menuID": 101,
+        "menuName": "Calendar",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    }, {
+        "menuID": 4,
+        "menuName": "Visitors",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    },{
+        "menuID": 21,
+        "menuName": "Amenities",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": [
+            {
+                "smenuID": 211,
+                "smenuName": "Amenity List",
+                "ismenuSelected": false,
+                
+            }, {
+                "smenuID": 212,
+                "smenuName": "Reservations",
+                "ismenuSelected": false
+            }]
+    }, {
+        "menuID": 103,
+        "menuName": "Communications",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": [
+            {
+                "smenuID": 1,
+                "smenuName": "Mass Notifications",
+                "ismenuSelected": false,
+                
+            }, {
+                "smenuID": 102,
+                "smenuName": "Contact Management",
+                "ismenuSelected": false
+            }]
+    },  {
+        "menuID":32,
+        "menuName":"Service Request",
+        "collapsed":false,
+        "ismenuSelected":false,
+        "leftSubMenus":[]
+    },{
+        "menuID": 34,
+        "menuName": "Transit",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    },{
+        "menuID": 51,
+        "menuName": "Parking",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": [{
+            "smenuID": 511,
+            "smenuName": "Assign",
+            "ismenuSelected": false
+        }, {
+            "smenuID": 512,
+            "smenuName": "Purchase",
+            "ismenuSelected": false
+        }, {
+            "smenuID": 513,
+            "smenuName": "Bike Room",
+            "ismenuSelected": false
+        }]
+    }, {
+        "menuID": 400,
+        "menuName": "Documents",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    },
+    {
+        "menuID": 2,
+        "menuName": "Users",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    }, {
+        "menuID": 30,
+        "menuName": "Building Information",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": []
+    },{
+        "menuID": 31,
+        "menuName": "Settings",
+        "collapsed": false,
+        "ismenuSelected": false,
+        "leftSubMenus": [{
+            "smenuID": 311,
+            "smenuName": "Notification Settings",
+            "ismenuSelected": false
+        }, {
+            "smenuID": 312,
+            "smenuName": "Privacy Policy",
+            "ismenuSelected": false
+        }, {
+            "smenuID": 313,
+            "smenuName": "Terms of Use",
+            "ismenuSelected": false
+        },{
+            "smenuID": 315,
+            "smenuName": "Version",
+            "ismenuSelected": false
+        }]
+    }
+    ]
+}

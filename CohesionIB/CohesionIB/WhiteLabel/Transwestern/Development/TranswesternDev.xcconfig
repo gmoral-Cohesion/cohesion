@@ -1,0 +1,20 @@
+//
+//  TranswesternDev.xcconfig
+//  CohesionIB
+//
+//  Created by okuznietsov on 15.11.2021.
+//  Copyright © 2021 cohesionIB, Inc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "../Production/Transwestern.xcconfig"
+
+TEMPLATE_BUNDLE_IDENTIFIER = $(inherited).dev
+TEMPLATE_DISPLAY_NAME = $(inherited)Dev
+TEMPLATE_DEPLOY = Development
+TEMPLATE_HEAP_ENVIRONMENT_ID = 1952116361
+
+
+DEPLOY = Dev // Should be removed in favor of build parameters.

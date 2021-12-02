@@ -1,0 +1,153 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name OrigoSDK
+import Foundation
+@_exported import OrigoSDK
+import PassKit
+import Swift
+@objc public enum HTTPStatusCode : Swift.Int {
+  case kHTTPStatusCodeContinue = 100
+  case kHTTPStatusCodeSwitchingProtocols = 101
+  case kHTTPStatusCodeProcessing = 102
+  case kHTTPStatusCodeOK = 200
+  case kHTTPStatusCodeCreated = 201
+  case kHTTPStatusCodeAccepted = 202
+  case kHTTPStatusCodeNonAuthoritativeInformation = 203
+  case kHTTPStatusCodeNoContent = 204
+  case kHTTPStatusCodeResetContent = 205
+  case kHTTPStatusCodePartialContent = 206
+  case kHTTPStatusCodeMultiStatus = 207
+  case kHTTPStatusCodeAlreadyReported = 208
+  case kHTTPStatusCodeIMUsed = 226
+  case kHTTPStatusCodeLowOnStorageSpace = 250
+  case kHTTPStatusCodeMultipleChoices = 300
+  case kHTTPStatusCodeMovedPermanently = 301
+  case kHTTPStatusCodeFound = 302
+  case kHTTPStatusCodeSeeOther = 303
+  case kHTTPStatusCodeNotModified = 304
+  case kHTTPStatusCodeUseProxy = 305
+  case kHTTPStatusCodeSwitchProxy = 306
+  case kHTTPStatusCodeTemporaryRedirect = 307
+  case kHTTPStatusCodePermanentRedirect = 308
+  case kHTTPStatusCodeBadRequest = 400
+  case kHTTPStatusCodeUnauthorized = 401
+  case kHTTPStatusCodePaymentRequired = 402
+  case kHTTPStatusCodeForbidden = 403
+  case kHTTPStatusCodeNotFound = 404
+  case kHTTPStatusCodeMethodNotAllowed = 405
+  case kHTTPStatusCodeNotAcceptable = 406
+  case kHTTPStatusCodeProxyAuthenticationRequired = 407
+  case kHTTPStatusCodeRequestTimeout = 408
+  case kHTTPStatusCodeConflict = 409
+  case kHTTPStatusCodeGone = 410
+  case kHTTPStatusCodeLengthRequired = 411
+  case kHTTPStatusCodePreconditionFailed = 412
+  case kHTTPStatusCodeRequestEntityTooLarge = 413
+  case kHTTPStatusCodeRequestURITooLong = 414
+  case kHTTPStatusCodeUnsupportedMediaType = 415
+  case kHTTPStatusCodeRequestedRangeNotSatisfiable = 416
+  case kHTTPStatusCodeExpectationFailed = 417
+  case kHTTPStatusCodeIAmATeapot = 418
+  case kHTTPStatusCodeEnhanceYourCalm = 420
+  case kHTTPStatusCodeUnprocessableEntity = 422
+  case kHTTPStatusCodeLocked = 423
+  case kHTTPStatusCodeFailedDependency = 424
+  case kHTTPStatusCodeUnorderedCollection = 425
+  case kHTTPStatusCodeUpgradeRequired = 426
+  case kHTTPStatusCodePreconditionRequired = 428
+  case kHTTPStatusCodeTooManyRequests = 429
+  case kHTTPStatusCodeRequestHeaderFieldsTooLarge = 431
+  case kHTTPStatusCodeNoResponse = 444
+  case kHTTPStatusCodeRetryWith = 449
+  case kHTTPStatusCodeBlockedByWindowsParentalControls = 450
+  case kHTTPStatusCodeParameterNotUnderstood = 451
+  case kHTTPStatusCodeConferenceNotFound = 452
+  case kHTTPStatusCodeNotEnoughBandwidth = 453
+  case kHTTPStatusCodeSessionNotFound = 454
+  case kHTTPStatusCodeMethodNotValidInThisState = 455
+  case kHTTPStatusCodeHeaderFieldNotValidForResource = 456
+  case kHTTPStatusCodeInvalidRange = 457
+  case kHTTPStatusCodeParameterIsReadOnly = 458
+  case kHTTPStatusCodeAggregateOperationNotAllowed = 459
+  case kHTTPStatusCodeOnlyAggregateOperationAllowed = 460
+  case kHTTPStatusCodeUnsupportedTransport = 461
+  case kHTTPStatusCodeDestinationUnreachable = 462
+  case kHTTPStatusCodeRequestHeaderTooLarge = 494
+  case kHTTPStatusCodeCertError = 495
+  case kHTTPStatusCodeNoCert = 496
+  case kHTTPStatusCodeHTTPToHTTPS = 497
+  case kHTTPStatusCodeClientClosedRequest = 499
+  case kHTTPStatusCodeInternalServerError = 500
+  case kHTTPStatusCodeNotImplemented = 501
+  case kHTTPStatusCodeBadGateway = 502
+  case kHTTPStatusCodeServiceUnavailable = 503
+  case kHTTPStatusCodeGatewayTimeout = 504
+  case kHTTPStatusCodeHTTPVersionNotSupported = 505
+  case kHTTPStatusCodeVariantAlsoNegotiates = 506
+  case kHTTPStatusCodeInsufficientStorage = 507
+  case kHTTPStatusCodeLoopDetected = 508
+  case kHTTPStatusCodeBandwidthLimitExceeded = 509
+  case kHTTPStatusCodeNotExtended = 510
+  case kHTTPStatusCodeNetworkAuthenticationRequired = 511
+  case kHTTPStatusCodeOptionNotSupported = 551
+  case kHTTPStatusCodeNetworkReadTimeoutError = 598
+  case kHTTPStatusCodeNetworkConnectTimeoutError = 599
+  case kHTTPStatusCodeDefault = 1355
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum OrigoKeysNetworkErrorCode : Swift.Int {
+  case errorCodeInternal = 10099
+  case errorCodeServerUnreachable = 10702
+  case errorCodeSDKIncompatible = 10701
+  case applicationNameNotAvailable = 15902
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc public class OrigoErrorConverter : ObjectiveC.NSObject {
+  @objc public class func origoError(with httpErrorCode: OrigoSDK.HTTPStatusCode, withNestedError error: Swift.Error?) -> Swift.Error
+  @objc public class func toErrorCode(fromHttpErrorStatus httpErrorCode: OrigoSDK.HTTPStatusCode) -> OrigoSDK.OrigoKeysNetworkErrorCode
+  @objc override dynamic public init()
+  @objc deinit
+}
+public typealias OrigoRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
+@_inheritsConvenienceInitializers @objc public class OrigoDataProvider : OrigoSDK.OrigoDataProviderBase {
+  @objc public class func isAppNameValid(_ name: Swift.String, completion: @escaping ((Swift.Bool, Swift.Error?) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class OrigoDataProviderBase : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PassKitUtil : ObjectiveC.NSObject {
+  @objc public static func suppressApplePay()
+  @objc override dynamic public init()
+  @objc deinit
+}
+public typealias Parameters = [Swift.String : Any]
+public struct URLParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: OrigoSDK.Parameters)
+}
+public struct BodyParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: OrigoSDK.Parameters)
+}
+public typealias HTTPHeaders = [Swift.String : Swift.String]
+public enum HTTPMethod : Swift.String {
+  case get
+  case post
+  case put
+  case patch
+  case delete
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}

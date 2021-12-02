@@ -1,0 +1,32 @@
+//
+//  Transwestern.xcconfig
+//  CohesionIB
+//
+//  Created by okuznietsov on 15.11.2021.
+//  Copyright © 2021 cohesionIB, Inc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+TEMPLATE_BUNDLE_IDENTIFIER = com.cohesionib.transwestern
+TEMPLATE_DISPLAY_NAME = TranswesternHub
+TEMPLATE_DEPLOY = Production
+TEMPLATE_CLIENT = Transwestern
+TEMPLATE_HEAP_ENVIRONMENT_ID = 2876368687
+TEMPLATE_EXCLUDED_SOURCE_FILE_NAMES = */WhiteLabel/*/*.xcassets */WhiteLabel/*/*/*.plist
+TEMPLATE_INCLUDED_SOURCE_FILE_NAMES = */WhiteLabel/${TEMPLATE_CLIENT}/*.xcassets
+TEMPLATE_MARKETING_VERSION = 1.2.1
+TEMPLATE_BUNDLE_VERSION = 0
+
+DEPLOY = Prod // Should be removed in favor of build parameters.
+
+// Permissions
+TEMPLATE_PRIVACY_BLUETOOTH_ALWAYS_USAGE_DESCRIPTION = Select ‘OK’ in order to use your mobile device as a keycard. If you select ‘Don’t Allow’, your mobile credential will not function.
+TEMPLATE_CALENDARS_USAGE_DESCRIPTION = This application would like to access your calender
+TEMPLATE_CAMERA_USAGE_DESCRIPTION = This application require user profile photo using camera
+TEMPLATE_LOCATION_ALWAYS_AND_IN_USE_USAGE_DESCRIPTION = This application uses Location to unlock doors within the building. Select ‘Allow While Using App’ for now. However, to enable automatic scanning in the background - go to Settings > ${TEMPLATE_DISPLAY_NAME} > Location > ‘Always Allow’.
+TEMPLATE_LOCATION_WHEN_IN_USAGE_DESCRIPTION = This application uses Location to unlock doors within the building. Select ‘Allow While Using App’ for now. However, to enable automatic scanning in the background - go to Settings > ${TEMPLATE_DISPLAY_NAME} > Location > ‘Always Allow’.
+TEMPLATE_MOTION_USAGE_DESCRIPTION = Transwestern Hub needs to know your motion to unlock nearby doors and call elevators.
+TEMPLATE_PHOTO_LYBRARY_ADD_USAGE_DESCRIPTION = This application require to store downloaded images into photos
+TEMPLATE_PHOTO_LYBRARY_USAGE_DESCRIPTION = This application require user profile photo using photo library
